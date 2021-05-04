@@ -14,7 +14,8 @@ const createToken = (id) => {
 
 
 exports.register = (req, res) => {
-  const { username, email, password } = req.body
+  const { username, email, password, role } = req.body
+  console.log(username, email)
   
   //Hash Password
   let hashPass = bcrypt.hashSync(password, 5)
@@ -29,7 +30,8 @@ exports.register = (req, res) => {
     new Users({
       username: username,
       email: email,
-      password: hashPass
+      password: hashPass,
+      role: role
     })
     .save()
     .then((data)=> {

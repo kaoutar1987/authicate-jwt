@@ -1,33 +1,23 @@
 const express = require ('express')
 const router = express.Router()
 const { register, login } = require('../controllers/userCtrl')
+const { admin } = require('../controllers/adminCtrl')
 const { auth }=require('../middlewares/auth')
 
 
 
 //register user 
-
 router.post('/register', register)
 
-//login User 
 
+//login User 
 router.post('/login', login)
 
 
-//Verify Token 
-router.get('/verify', auth)
-
+//login User 
+router.get('/admin', auth, admin)
 
    
-
-
-
-
-
-
-
-
-
 
 
 
