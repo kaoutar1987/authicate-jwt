@@ -24,7 +24,7 @@ exports.auth = (req, res, next) => {
 exports.clientAuth = (req, res) => {
     const token = req.cookies.user_jwt
     try {
-        if(!token) return res.status(400).json({isAuth: false, role: ''})
+        if(!token) return res.json({isAuth: false, role: ''})
 
         jwt.verify(token, process.env.JWT_SECRET, async (err, decoedToken) => {
             if(err) throw err
