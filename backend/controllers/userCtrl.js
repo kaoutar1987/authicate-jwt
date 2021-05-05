@@ -35,7 +35,7 @@ exports.register = (req, res) => {
     })
     .save()
     .then((data)=> {
-      return res.json({message: "Your registration was done success", data: data})
+      return res.json({message: "Your registration was done success", data: data, isAuth: true, role: data.role})
     })
 
   })
@@ -61,10 +61,15 @@ exports.login = (req, res) => {
         return res.status(200).cookie('user_jwt', token, {
           httpOnly: true,
           maxAge: maxAge * 1000
-        }).json({message: 'You\'re LoggedIn'})
+        }).json({message: 'You\'re LoggedIn', isAuth: true, role: data.role })
     }
 
     return res.json({message: "Incoreect pass"})
   })
   .catch(err => { console.log(err) })
+}
+
+
+exports.logout = (req, res) => {
+ return res.status(200).clearCookie('user_jwt').json({isAuth: false, role:''})
 }

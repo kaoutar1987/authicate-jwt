@@ -1,6 +1,6 @@
 const express = require ('express')
 const router = express.Router()
-const { register, login } = require('../controllers/userCtrl')
+const { register, login, logout } = require('../controllers/userCtrl')
 const { admin } = require('../controllers/adminCtrl')
 const { auth }=require('../middlewares/auth')
 
@@ -17,7 +17,7 @@ router.post('/login', login)
 //login User 
 router.get('/admin', auth, admin)
 
-   
+router.get('/logout', logout)  
 
 
 

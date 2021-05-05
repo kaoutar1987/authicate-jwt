@@ -1,21 +1,25 @@
-    import React, { useState } from "react"
+    import React, { useState, useContext } from "react"
     import axios from "axios"
+    import { UserContext } from '../contextApi/Context'
 
     const SignUp = () => {
+        const { setInfos } = useContext(UserContext)
 
         const initialState = {username :'', email:'', password:'', role:''}
-        const [infos, setInfos]= useState(initialState)
+        const [information, setInformation]= useState(initialState)
 
       const handleChangeInput = e => {
         const {name, value} = e.target
         // console.log(name , " " , value)
-            setInfos({...infos, [name]: value})
+        setInformation({...information, [name]: value})
         }
 
         const handelSubmit = (e) =>{
             e.preventDefault()
-            axios.post('http://localhost:3000/api/register', infos).then(response => {
+            // console.log(information)
+            axios.post('http://localhost:3000/api/register', information).then(response => {
                 console.log(response)
+                setInfos(response.data)
             })
             .catch(err => { console.log(err) })
 
@@ -60,9 +64,9 @@
                     <div className="form-group">
                     <select className="custom-select" name="role" onChange={handleChangeInput} >
                         <option>select client </option>
-                        <option value="admin">Admin</option>
-                        <option value="user">Uesr</option>
-                        <option value="technicin">Technicien</option>
+                        <option value="admin">admin</option>
+                        <option value="user">uesr</option>
+                        <option value="technicin">technicien</option>
                     </select>
                     </div>
 
