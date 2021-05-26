@@ -10,7 +10,7 @@ const Navbar = () => {
       <div className="Navbar">
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <div className="container">
-          <Link className="navbar-brand" to={"/sign-in"}>jwt auth</Link>
+          <Link className="navbar-brand" to={"/sign-in"}> System Ticket</Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
             <li className="nav-item">

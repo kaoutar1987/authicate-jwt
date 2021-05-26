@@ -21,14 +21,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    
+    phone: {
+        type: Number, default: 0
+    },
+
     role: {
         type: String,
-        //enum: ["user", "admin", "technicien"],
+        enum: ["user", "admin", "technicien"],
         default: "user"
+      },
+
+     department:{
+          type: String, // hardware , software     //        designer , developer mobile, ...
       }
 
-}, 
+
+},
 {
     versionKey: false
 })

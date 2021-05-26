@@ -14,7 +14,7 @@ const createToken = (id) => {
 
 
 exports.register = (req, res) => {
-  const { username, email, password, role } = req.body
+  const { username, email, phone, password, department, role } = req.body
   console.log(username, email)
   
   //Hash Password
@@ -30,7 +30,9 @@ exports.register = (req, res) => {
     new Users({
       username: username,
       email: email,
+      phone: phone,
       password: hashPass,
+      department: department,
       role: role
     })
     .save()

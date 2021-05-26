@@ -2,7 +2,7 @@ import React, { useContext} from 'react';
 import { BrowserRouter as Router, Redirect, Switch, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar"
 import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import SignUp from "./pages/admin/SignUp";
 import Admin from './pages/Admin';
 import User from './pages/User';
 import Home from './pages/Home';

@@ -34,11 +34,12 @@ body, html, .App, #root, .auth-wrapper {
 }
 
 .auth-inner {
-  width: 450px;
-  margin: auto;
+  width: 550px;
+  margin:auto;
+  margin-top: 13rem;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-  padding: 10px 20px 15px 20px;
+  padding: 20px 20px 25px 20px;
   border-radius: 15px;
   transition: all .3s;
 }
@@ -52,7 +53,7 @@ body, html, .App, #root, .auth-wrapper {
   text-align: center;
   margin: 0;
   line-height: 1;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .custom-control-label {
@@ -63,7 +64,7 @@ body, html, .App, #root, .auth-wrapper {
 .forgot-password a {
   text-align: right;
   font-size: 13px;
-  padding-top: 10px;
+  padding-top: 30px;
   color: #7f7d7d;
   margin: 0;
 }
