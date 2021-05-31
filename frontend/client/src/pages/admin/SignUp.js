@@ -29,6 +29,8 @@
        }
       
             return (
+                <div className="auth-wrapper">
+                <div className="auth-inner">
                 <form className='mt-5' onSubmit={handelSubmit}>
                     <h3>Sign Up as {information.role}</h3>
                     {message ? 
@@ -115,6 +117,8 @@
                         Already registered <a href="/">sign in?</a>
                     </p>
                 </form>
+                </div> 
+                </div> 
             );
         }
 

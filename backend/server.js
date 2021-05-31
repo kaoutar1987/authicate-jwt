@@ -23,7 +23,7 @@ app.use(express.json())
 
 //rotes 
 app.use('/api', userRouter)
-app.use('*', clientAuth)
+// app.use('*', clientAuth)
 
 
 

@@ -1,49 +1,59 @@
 const Assign = require('../models/assingM')
-const Ticket = require('../models/ticket')
+const Ticket = require('../models/ticketM')
 const jwt = require('jsonwebtoken')
 
 
-
-
-
-exports.assignTicket = (req, res) => {
-    const { id_user, id_ticket, id_technician } = req.body
-    
-    new Assign({
-         id_user: id_user,
-         id_ticket: id_ticket,
-         id_technician: id_technician
-    })
-    .save()
-    .then(() => {
-         Ticket.findByIdAndUpdate(id_ticket, {status: false}).then(() => {
-              res.json({message: 'Ticket is assigned'})
-         })
-    })
-}
-exports.readAssigned = (req, res) => {
-    Assign.find({is_accepted: null})
-    .populate('id_user id_technician id_ticket')
-    .then(data => {
-         return res.json(data)
-    })
-}
-//exports.ticketClose = (req, res) => {
-//  Ticket.find({status: true}).populate('id_user').then(data => {
- //        return res.json(data)
-   // })
-//}
-
-exports.ticketRefused = (req, res) => {
-    Assign.find({is_accepted: false})
-    .populate('id_ticket id_user id_technician')
-    .then(data => {
-         return res.json(data)
-    })
+exports.assignTicket = async (req, res) => {
+    try {
+        const { technician } = req.body
+        const { id } = req.params
+        const idticket = await Ticket.findOne({_id : id})
+        const assignedTicket = new Assign({
+            technician_Id : technician,
+            ticket_Id : idticket._id
+        })
+        const etatTicket = await Ticket.findByIdAndUpdate({_id : id}, {etat : 'Affecte'}) 
+        console.log("save",assignedTicket)
+        const assignSave = await assignedTicket.save()
+        res.status(201).json({message : "The Ticket Assigned", assignSave}) 
+    } catch (error) {
+        res.status(500).json(500)
+    }
 }
 
 
+exports.getTicketTechnician = async (req, res) => {
+    try {
+        const token = req.cookies.user_jwt
+        let id_User;
+        if(token){
+            jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+                id_User = decodedToken.id
+                return id_User
+        })}
+    const ticketTichnician = await Assign.find({technician_Id : id_User}).populate('ticket_Id', 'title ticket_type urgent etat description _id')
+        // console.log(ticketTichnician)
+        res.status(201).json(ticketTichnician)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
 
+exports.refuseTicket = async (req, res) => {
+    try {
+        const refuse = await Ticket.findByIdAndUpdate({_id : req.params.id}, {etat : 'Reaffecte'})
+        res.status(200).json({message : 'Ticket refuse !'})
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
 
-
+exports.acceptTicket = async (req, res) => {
+    try {
+        const accept = await Ticket.findByIdAndUpdate({_id : req.params.id}, {etat : 'Cloture'})
+        res.status(200).json({message : 'Ticket accepted !'})
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
 

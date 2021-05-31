@@ -75,3 +75,15 @@ exports.login = (req, res) => {
 exports.logout = (req, res) => {
  return res.status(200).clearCookie('user_jwt').json({isAuth: false, role:''})
 }
+
+
+
+
+exports.getTechnician = async (req, res) => {
+  
+  Users.find({role : 'technicien'}).then(data => {
+    res.status(201).json(data)
+  })
+  .catch((err) => { console.log(err)})
+
+}

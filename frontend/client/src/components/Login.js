@@ -29,6 +29,8 @@ const Login=()=>{
    }
   
         return (
+            <div className="auth-wrapper">
+            <div className="auth-inner">
             <form onSubmit={handelSubmit}>
                 <h3>Sign In</h3>
 
@@ -57,6 +59,8 @@ const Login=()=>{
                     Forgot <a href="/">password?</a>
                 </p>
             </form>
+            </div>
+            </div>
         );
     }
     export default Login
