@@ -9,8 +9,8 @@ exports.assignTicket = async (req, res) => {
         const { id } = req.params
         const idticket = await Ticket.findOne({_id : id})
         const assignedTicket = new Assign({
-            technician_Id : technician,
-            ticket_Id : idticket._id
+            id_technician : technician,
+            id_ticket: idticket._id
         })
         const etatTicket = await Ticket.findByIdAndUpdate({_id : id}, {etat : 'Affecte'}) 
         console.log("save",assignedTicket)
@@ -25,14 +25,14 @@ exports.assignTicket = async (req, res) => {
 exports.getTicketTechnician = async (req, res) => {
     try {
         const token = req.cookies.user_jwt
-        let id_User;
+        let id_user;
         if(token){
             jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-                id_User = decodedToken.id
-                return id_User
+                id_user = decodedToken.id
+                return id_user
         })}
-    const ticketTichnician = await Assign.find({technician_Id : id_User}).populate('ticket_Id', 'title ticket_type urgent etat description _id')
-        // console.log(ticketTichnician)
+    const ticketTichnician = await Assign.find({id_technician : id_user}).populate('id_ticket', 'title ticket_type urgence etat description ')
+        console.log(ticketTichnician)
         res.status(201).json(ticketTichnician)
     } catch (error) {
         res.status(500).json(error)

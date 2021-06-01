@@ -70,7 +70,7 @@ function AssignTicket() {
                     <h5 className="card-title mt-3">Title : {infos.title}  </h5>
                     <p className="card-text">Type of Ticket : {infos.ticket_type}  </p>
                     <p className="card-text">State : {infos.urgence}  </p>
-                    <p className="card-text">Date : {infos.created_at}   </p>
+                    <p className="card-text">Date : {infos.date}   </p>
                 
                 
 

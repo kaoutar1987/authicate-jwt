@@ -6,7 +6,7 @@ function AllTicket() {
     const [infos, setInfos] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/allTicketUser')
+        axios.get('http://localhost:3000/api/allTicket')
         .then(response => {
             const Data = response.data
             console.log(Data);

@@ -5,11 +5,11 @@ const jwt = require('jsonwebtoken')
 exports.createTicket = async (req, res) => {
     try {
         const token = req.cookies.user_jwt
-        let id_User;
+        let id_user;
         if(token){
             jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-                id_User = decodedToken.id
-                return id_User
+                id_user = decodedToken.id
+                return id_user
         })}
         const {title, ticket_type,  urgence, description, etat  } = req.body
     
@@ -19,7 +19,7 @@ exports.createTicket = async (req, res) => {
             urgence, 
             description,
             etat , 
-            id_user: id_User
+            id_user: id_user
         })
         const saveTicket = await ticket.save()
         res.status(200).json({message:"Ticket has been created",  saveTicket})
